@@ -159,17 +159,20 @@ function mostrar_sitio($id_tran) {
     $salida = ''; // Se inicializa la variable 
     $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_03'); // Se establece la conexión a la base de datos
 
-    $sq = "SELECT (Tu_sitio) from tb_Personas where id_transaccin='$id_tran'";
+    $sq = "SELECT (Tu_sitio) AS Sitio from tb_Personas where id_transaccin='$id_tran'";
 
     $resultado = $conexion->query($sq); // Consulta SQL 
-    while ($Fila = mysqli_fetch_array($resultado)) {
-        $salida = $Fila[0];    //Inch o acumula         
+
+    while ($Fila = mysqli_fetch_assoc($resultado)) {
+        $salida.="<a href='".$Fila['Sitio']."'>";
+        $salida.="Ve al sitio ";     
+        
+        $salida.="</a>";
 
     $conexion->close(); // Se cierra la conexión a la base de datos
 
     return $salida; // Se retorna el valor de la variable
 }}
-
 
 ?>
 
