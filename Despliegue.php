@@ -2,9 +2,6 @@
 //Se incluye el archivo funciones
 include('Funciones.php');
 
-//Se invoca la funcion
-echo consulta()."\n";
-
-echo Aprender();
-
+echo consulta()."<br>"; //Se invoca la funcion con un espacio entre linea
+echo Aprender(); //Se invoca la funcion
 ?>
