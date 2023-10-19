@@ -19,8 +19,6 @@ function consulta(){
 
 }
 
-
-
 function Calculo_1(){
 
     $Salida=0;          //Se iniciliza la variable
@@ -86,4 +84,92 @@ function Count_Users() {
     return $Salida; // Se retorna el valor de la variable $Salida
 }
 
+function insertar_datos($id_tran, $nombre, $plata, $fec_ingre, $id_rol) {
+    $salida = ""; // Se inicializa la variable 
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_03'); // Se establece la conexión a la base de datos
+
+    $sq = "INSERT INTO tb_personas (id_transaccin, Nombre, Plata, Fecha_ingreso, id_rol) VALUES ('$id_tran', '$nombre', '$plata', '$fec_ingre', '$id_rol')"; // Se define la consulta SQL para insertar un nuevo registro en la tabla tb_personas con los valores proporcionados
+
+    $resultado = $conexion->query($sq); // Consulta SQL 
+
+    if ($resultado) { // Si el resultado de la consulta es verdadero 
+        $salida = "Registro exitoso"; // Se actualiza la variable 
+    } else { // Si el resultado de la consulta es falso 
+        $salida = "Error en el registro: " . $conexion->error; // Se actualiza la variable $salida con el mensaje "Error en el registro" seguido del mensaje de error específico proporcionado por MySQL
+    }
+
+    $conexion->close(); // Se cierra la conexión a la base de datos
+
+    return $salida; // Se retorna el valor de la variable
+}
+
+function Delete_User($id_tran) {
+
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_03'); // Se establece la conexión a la base de datos
+    $sq = "DELETE FROM tb_personas WHERE id_transaccin = '$id_tran'"; // Se define la consulta SQL 
+
+    if (mysqli_query($conexion, $sq)) { // Si el resultado de la consulta es verdadero 
+        if (mysqli_affected_rows($conexion) > 0) {
+            return 'El usuario ha sido borrado exitosamente.';  // Se retorna el mensaje de éxito
+        } 
+    } else { // Si el resultado de la consulta es falso 
+            return 'No se pudo borrar el usuario.';  // Se retorna el mensaje de error
+    }
+}
+/*
+function insertar_datos($id_tran, $nombre, $plata, $fec_ingre, $id_rol) {
+    $salida = ""; // Se inicializa la variable 
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_03'); // Se establece la conexión a la base de datos
+
+    $sq = "INSERT INTO tb_personas (id_transaccin, Nombre, Plata, Fecha_ingreso, id_rol) VALUES ('$id_tran', '$nombre', '$plata', '$fec_ingre', '$id_rol')"; // Se define la consulta SQL para insertar un nuevo registro en la tabla tb_personas con los valores proporcionados
+
+    $resultado = $conexion->query($sq); // Consulta SQL 
+
+    if ($resultado) { // Si el resultado de la consulta es verdadero 
+        $salida = "Registro exitoso"; // Se actualiza la variable 
+    } else { // Si el resultado de la consulta es falso 
+        $salida = "Error en el registro: " . $conexion->error; // Se actualiza la variable $salida con el mensaje "Error en el registro" seguido del mensaje de error específico proporcionado por MySQL
+    }
+
+    $conexion->close(); // Se cierra la conexión a la base de datos
+
+    return $salida; // Se retorna el valor de la variable
+}*/
+
+function insertar_sitio($sitio,$id_tran ) {
+    $salida = ""; // Se inicializa la variable 
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_03'); // Se establece la conexión a la base de datos
+
+    $sq = "UPDATE tb_personas SET Tu_sitio = '$sitio' WHERE id_transaccin = '$id_tran'";
+
+    $resultado = $conexion->query($sq); // Consulta SQL 
+
+    if ($resultado) { // Si el resultado de la consulta es verdadero 
+        $salida = "Actualizaste con  exito tu sitio"; // Se actualiza la variable 
+    } else { // Si el resultado de la consulta es falso 
+        $salida = "Error al actualizar tu sitio " . $conexion->error; // Se actualiza la variable $salida con el mensaje "Error en el registro" seguido del mensaje de error específico proporcionado por MySQL
+    }
+
+    $conexion->close(); // Se cierra la conexión a la base de datos
+
+    return $salida; // Se retorna el valor de la variable
+}
+
+function mostrar_sitio($id_tran) {
+    $salida = ''; // Se inicializa la variable 
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'practica_03'); // Se establece la conexión a la base de datos
+
+    $sq = "SELECT (Tu_sitio) from tb_Personas where id_transaccin='$id_tran'";
+
+    $resultado = $conexion->query($sq); // Consulta SQL 
+    while ($Fila = mysqli_fetch_array($resultado)) {
+        $salida = $Fila[0];    //Inch o acumula         
+
+    $conexion->close(); // Se cierra la conexión a la base de datos
+
+    return $salida; // Se retorna el valor de la variable
+}}
+
+
 ?>
+
