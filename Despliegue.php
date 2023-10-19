@@ -3,4 +3,8 @@
 include('Funciones.php');
 
 //Se invoca la funcion
-echo consulta();
+echo consulta()."\n";
+
+echo Aprender();
+
+?>
